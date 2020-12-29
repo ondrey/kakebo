@@ -8,7 +8,7 @@
 export default {
     data(){
         return {
-            current_account: 'Счет кредитной карты'
+            
         }
     }
 
