@@ -1,8 +1,8 @@
 <template>
 <div>
 
+
   <div class="title">Расходы по категориям</div>
-  
 
   <div class="plan" style="padding-bottom:5px">
    <div class="head_box" v-for="i in categories" :key="i.id">
@@ -12,25 +12,38 @@
   </div>
   </div>
 
-
-  <div class="title">Итоги</div>
-    
-    <div class="plan">
-      
-      
-
-      <div class="steklo" style="width:210px"> 
-      <div class="head_box "><div>Остаток</div><div>74 550,00 р.</div></div>
-      <div class="head_box "><div>Расходы</div><div>25 450,00 р.</div></div>
-      <div class="head_box "><div>Бюджет</div><div>100 000,00 р.</div></div>
-      </div>
-
-      
-    </div>
   <div class="title">Планы</div>
-  <div class="plan"></div>
+  <div class="plan">
     
+    <div class="head_box">        
+    <a href="#" class="linkpage" style="text-align:left">Обязательные расходы</a>    
+    <span v-html="Number(15000).toLocaleString()" class="digiticon"></span>
+    <span class="el-icon-date digiticon"></span>
+    </div>
+
+    <div class="head_box" style="padding-bottom:5px">    
+    <a href="#" class="linkpage" style="text-align:left">Доходы</a>    
+    <div v-html="Number(120000).toLocaleString()" class="digiticon"></div>
+    <span class="el-icon-money digiticon"></span>
+    </div>
+
+    <div class="head_box" style="padding-bottom:5px">    
+    <a href="#" class="linkpage" style="text-align:left">Бюджет по категориям</a>
+    <div v-html="Number(105000).toLocaleString()" class="digiticon"></div>
+    <span class="el-icon-s-operation digiticon"></span>
+    </div>
+
+  </div>
+    <div class="title">Накопления</div>
+    <div class="head_box">
+    <div @click="nextStep" class="buttonplus" style="font-size: small; padding: 3px 25px;"> <span class="el-icon-refresh"></span> Закрыть период </div>
+    <div style="text-align:right">Осталось:</div>
+    <div v-html="Number(15356).toLocaleString()" class="digiticon"></div>
+    </div>    
     
+  <div class="small">
+    <line-chart :chart-data="datacollection"></line-chart>
+  </div>    
     
 
 </div>
@@ -38,9 +51,16 @@
 </template>
 
 <script>
+import LineChart from '../components/chart'
+
+
 export default {
+  components: {
+      LineChart
+  },  
   data(){
     return {
+      datacollection: null,
       categories: [
         {name: 'Продукты', dif: 456, id: 1},
         {name: 'Хоз товары', dif: 0, id: 2},
@@ -50,10 +70,26 @@ export default {
       ]
     }
   },
-  methods:{
-    dgclass(dg){
-      return dg < 0 ? 'dgminus' : 'dgnormal'
-    }
+  mounted(){
+    this.datacollection = {
+        labels: ['12.05.2020', '16.06.2020', '09.10.2020', '12.05.2020', '16.06.2020', '09.10.2020'],
+        datasets: [
+            {
+              label: 'Накопления',              
+              data: [-789, 11000, 5000, 44569, 35389]
+            }, 
+          ]
+      }
+  },
+  methods: {
+      nextStep(){
+        this.datacollection.label.push('08.11.2020')
+        this.datacollection.datasets.data.push(40000)
+
+      },
+      dgclass(dg){
+        return dg < 0 ? 'dgminus' : 'dgnormal'
+      }      
   }
 }
 </script>
@@ -83,7 +119,8 @@ export default {
     background: linear-gradient(180deg, rgb(154 214 171) 0%, rgb(133 202 152) 100%);
     box-shadow: 1px 1px 3px #00000042, -1px -1px 3px #ffffff9e;
     border-radius: 5px;
-    padding-top: 5px;    
+    padding-top: 5px;   
+    padding-bottom: 5px; 
 }
 
 .buttonplus {
@@ -92,7 +129,7 @@ export default {
     border-radius: 5px;
     padding-left: 4px;
     padding-right: 4px;
-    font-weight: 700;
+    
     cursor: pointer;
 }
 .buttonplus:active {
@@ -118,15 +155,10 @@ export default {
   color: white;
 }
 
-.steklo {
-    border-style: inset;
-    border-width: thin;
-    border-radius: 4px;
-    padding: 3px;
-    /*background-color: #75bb88;*/
-    background: linear-gradient(180deg, rgba(255,255,255,0.21052170868347342) 0%, rgb(0 0 0 / 15%) 100%);
-
-    color: #d3f9de;
+.digiticon {
+  
+  font-size: large;
+  margin: 0px 2px;
 }
 
 </style>
