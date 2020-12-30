@@ -2,17 +2,21 @@
 <div>
 
 
-  <div class="title">Расходы по категориям</div>
+  
 
   <div class="plan" style="padding-bottom:5px">
-   <div class="head_box" v-for="i in categories" :key="i.id">
+   <div class="head_box" v-for="i in categories" :key="i.id">     
     <div :class="dgclass(i.dif)" v-html="i.dif.toLocaleString()"></div>
     <a href="#" class="linkpage">{{i.name}}</a>
     <div class="buttonplus">+</div>
   </div>
   </div>
+      
+  <div class="title">Расходы по категориям</div>
+  
+  
 
-  <div class="title">Планы</div>
+  
   <div class="plan">
     
     <div class="head_box">        
@@ -34,16 +38,27 @@
     </div>
 
   </div>
-    <div class="title">Накопления</div>
+  <div class="title">Плановые платежи</div>
+
+
+    
     <div class="head_box">
     <div @click="nextStep" class="buttonplus" style="font-size: small; padding: 3px 25px;"> <span class="el-icon-refresh"></span> Закрыть период </div>
     <div style="text-align:right">Осталось:</div>
     <div v-html="Number(15356).toLocaleString()" class="digiticon"></div>
     </div>    
     
+    
   <div class="small">
     <line-chart :chart-data="datacollection"></line-chart>
   </div>    
+    
+
+    <div class="plan">
+    <div class="buttonplus button" style="margin:5px"> <span class="el-icon-upload"></span> Отправить в облако </div>    
+    <span><a href="kjm.su">kjm.su</a> - учет финансов</span>
+    </div>
+    
     
 
 </div>
@@ -74,10 +89,8 @@ export default {
     this.datacollection = {
         labels: ['12.05.2020', '16.06.2020', '09.10.2020', '12.05.2020', '16.06.2020', '09.10.2020'],
         datasets: [
-            {
-              label: 'Накопления',              
-              data: [-789, 11000, 5000, 44569, 35389]
-            }, 
+            {data: [-789, 11000, 5000, 44569, 35389]
+            ,label: 'Накопления'}, 
           ]
       }
   },
@@ -96,11 +109,10 @@ export default {
 
 <style>
 .title {
-    font-size: x-large;
+    font-size: small;
     text-align: end;
-    font-weight: 700;
-    color: #98e0ac;
-    margin: 5px;
+    margin-bottom: 3em;
+    margin-top: 1em;
 }
 .head_box {
   justify-content: space-between;
@@ -132,6 +144,7 @@ export default {
     
     cursor: pointer;
 }
+.button {font-size: small; padding: 3px 25px;}
 .buttonplus:active {
   color: white;
   box-shadow: none;
@@ -148,16 +161,15 @@ export default {
 }
 
 .dgminus {
-  color: brown;
+  color: crimson;
+  font-size: small;
 }
 
-.dgnormal {
-  color: white;
+.dgnormal {    
+    font-size: small;
 }
 
-.digiticon {
-  
-  font-size: large;
+.digiticon {    
   margin: 0px 2px;
 }
 

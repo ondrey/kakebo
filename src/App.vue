@@ -8,6 +8,8 @@
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   color:#2b653b;
-     
+}
+body {
+  margin:0px; padding:0px; background-color:#85ca98;
 }
 </style>
