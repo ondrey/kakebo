@@ -1,6 +1,14 @@
 <template>
   <div style="padding:12px 8px 8px 12px;">
+    <div style="display: flex;justify-content: space-between;padding-bottom: 15px;font-family: system-ui; font-size: small; color: darkgray;">
+      <span>KJM - учёт затрат</span> 
+      <span> <a href="http://#" class="linkpage">О программе</a> </span> 
+    </div> 
+
     <router-view/>    
+
+
+
   </div>
 </template>
 
@@ -16,6 +24,7 @@ export default {
 </script>
 
 <style>
+
 .title {
     font-size: small;
     text-align: end;
@@ -45,7 +54,7 @@ export default {
     display: flex;   
     background-color: #cfe1e6;    
     border-radius: 6px;
-    padding: 6px;
+    padding: 3px;
     margin: 4px;
     box-shadow: inset -1px -1px 1px rgb(255 255 255 / 59%), inset 1px 1px 1px rgb(0 0 0 / 15%);
 }
@@ -71,7 +80,7 @@ export default {
 
 .button {font-size: small; padding: 3px 25px;}
 .buttonplus:active {
-  color: white;
+  color: #8a8a8a;
   box-shadow: none;
 }
 
@@ -96,6 +105,7 @@ export default {
 
 .digiticon {    
   margin: 0px 2px;
+  font-size: small;
 }
 
 </style>

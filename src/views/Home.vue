@@ -22,10 +22,10 @@
       <span style="font-size: small;">Остаток</span>
       <span>456 879</span>
       
-      <span style="font-size: small;"> 43 121 Расход <br> 500 000 Бюджет  </span>
+      <span style="font-size: small; text-align: end;"> 43 121 Расход <br> 500 000 Бюджет  </span>
     </div>
 
-    <div @click="nextStep" class="buttonplus button_close_period"> <span class="el-icon-refresh buttoicon"></span> Закрыть период </div>
+    <div class="buttonplus button_close_period"> <span class="el-icon-refresh buttoicon"></span> Закрыть период </div>
    
 
   </div>
@@ -37,39 +37,32 @@
     
     <div class="head_box">        
     <a href="#" class="linkpage" style="text-align:left">Обязательные расходы</a>    
-    <div class="back" style="margin:0px">
-      <span v-html="Number(15000).toLocaleString()" class="digiticon"></span>
+      <span v-html="Number(15000).toLocaleString()" class="digiticon"></span>      
       <span class="el-icon-date digiticon"></span>
-    </div>
     </div>
 
     <div class="head_box" style="padding-bottom:5px">    
-    <a href="#" class="linkpage" style="text-align:left">Доходы</a>    
-    <div class="back" style="margin:0px">
+    <a href="#" class="linkpage" style="text-align:left">Доходы</a>
       <div v-html="Number(120000).toLocaleString()" class="digiticon"></div>
       <span class="el-icon-money digiticon"></span>
-    </div>
     </div>
 
     <div class="head_box" style="padding-bottom:5px">    
     <a href="#" class="linkpage" style="text-align:left">Бюджет по категориям</a>
-    <div class="back" style="margin:0px">
       <div v-html="Number(105000).toLocaleString()" class="digiticon"></div>
       <span class="el-icon-s-operation digiticon"></span>
     </div>
-    
-    </div>
 
   </div>
+
   <div class="title">Плановые платежи</div>
-
-
-
     <div>
       <line-chart :chart-data="datacollection"></line-chart>
-    </div>
-    
-    
+    </div>    
+
+<alert button_text="Хорошо" :visible="true" title="Инфо!">
+  Скоро заканчивается отчетный период
+</alert>
 
 </div>
   
@@ -77,11 +70,12 @@
 
 <script>
 import LineChart from '../components/chart'
+import Alert from '../components/alert'
 
 
 export default {
   components: {
-      LineChart
+      LineChart, Alert
   },  
   data(){
     return {
@@ -100,16 +94,11 @@ export default {
         labels: ['12.05', '16.06', '09.10', '12.05', '16.06', '09.10'],
         datasets: [
             {data: [-789, -300, -456, 0, 123, 250]
-            ,label: 'Накопления'}, 
+            ,label: 'Динамика накоплений'}, 
           ]
       }
   },
-  methods: {
-      nextStep(){
-        this.datacollection.label.push('08.11.2020')
-        this.datacollection.datasets.data.push(40000)
-
-      },
+  methods: {     
       dgclass(dg){
         return dg < 0 ? 'dgminus' : 'dgnormal'
       }      
