@@ -15,6 +15,22 @@
   <div class="title">Расходы по категориям</div>
   
   
+  <div class="plan">
+
+    <div class="back back_jambo">
+      
+      <span style="font-size: small;">Остаток</span>
+      <span>456 879</span>
+      
+      <span style="font-size: small;"> 43 121 Расход <br> 500 000 Бюджет  </span>
+    </div>
+    
+    <div @click="nextStep" class="buttonplus" style="font-size: small; padding: 3px 25px;"> <span class="el-icon-refresh"></span> Закрыть период </div>
+   
+
+  </div>
+  <div class="title">Итоги</div>
+
 
   
   <div class="plan">
@@ -106,71 +122,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.title {
-    font-size: small;
-    text-align: end;
-    margin-bottom: 3em;
-    margin-top: 1em;
-}
-.head_box {
-  justify-content: space-between;
-  display: flex;
-  margin: 1em;
-}
-
-.maxidigit {
-  font-size: x-large;
-}
-.plan{
-    width: 100%;
-    min-height: 64px;
-    /*background-color:#85ca98;*/
-    background: rgb(151,224,171);
-    background: linear-gradient(180deg, rgb(154 214 171) 0%, rgb(133 202 152) 100%);
-    box-shadow: 1px 1px 3px #00000042, -1px -1px 3px #ffffff9e;
-    border-radius: 5px;
-    padding-top: 5px;   
-    padding-bottom: 5px; 
-}
-
-.buttonplus {
-    background: linear-gradient(180deg, rgb(154 214 171) 0%, rgb(133 202 152) 100%);
-    box-shadow: 1px 1px 3px #00000042, -1px -1px 3px #ffffff9e;
-    border-radius: 5px;
-    padding-left: 4px;
-    padding-right: 4px;
-    
-    cursor: pointer;
-}
-.button {font-size: small; padding: 3px 25px;}
-.buttonplus:active {
-  color: white;
-  box-shadow: none;
-}
-
-.linkpage {
-    color: #ffffff;
-    width: 100%;
-    text-align: end;
-    margin-right: 10px;
-    border-bottom-style: dotted;
-    border-bottom-width: thin;
-    text-decoration: none;
-}
-
-.dgminus {
-  color: crimson;
-  font-size: small;
-}
-
-.dgnormal {    
-    font-size: small;
-}
-
-.digiticon {    
-  margin: 0px 2px;
-}
-
-</style>
