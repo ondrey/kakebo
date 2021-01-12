@@ -25,7 +25,7 @@
       <span style="font-size: small; text-align: end;"> 43 121 Расход <br> 500 000 Бюджет  </span>
     </div>
 
-    <div class="buttonplus button_close_period"> <span class="el-icon-refresh buttoicon"></span> Закрыть период </div>
+    <div class="buttonplus button_close_period" @click="alert = !alert"> <span class="el-icon-refresh buttoicon"></span> Закрыть период </div>
    
 
   </div>
@@ -60,7 +60,7 @@
       <line-chart :chart-data="datacollection"></line-chart>
     </div>    
 
-<alert button_text="Хорошо" :visible="true" title="Инфо!">
+<alert button_text="Хорошо" :visible="alert" title="Инфо!">
   Скоро заканчивается отчетный период
 </alert>
 
@@ -79,6 +79,7 @@ export default {
   },  
   data(){
     return {
+      alert: false,
       datacollection: null,
       categories: [
         {name: 'Продукты', dif: 456, id: 1},
