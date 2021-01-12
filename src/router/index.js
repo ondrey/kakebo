@@ -23,6 +23,14 @@ const routes = [
         meta: {
           title: 'О программе'
         }
+      },
+      {
+        path: 'new',
+        component: () => import(/* webpackChunkName: "New" */ '../views/AddTransact.vue'),
+        name: 'New',
+        meta: {
+          title: 'Новый расход'
+        }
       }      
     ],
   }

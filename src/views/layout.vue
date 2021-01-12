@@ -1,14 +1,11 @@
 <template>
   <div style="padding:12px 8px 8px 12px;">
     <div style="display: flex;justify-content: space-between;padding-bottom: 15px;font-family: system-ui; font-size: small; color: darkgray;">
-      <span>KJM - учёт затрат</span> 
-      <span> <a href="http://#" class="linkpage">О программе</a> </span> 
+      <span> <span class="el-icon-s-home"></span> <a href="/" class="linkpage">KJM</a> - учёт затрат, главная</span> 
+      <span> <a href="#/about" class="linkpage">О программе</a> </span> 
     </div> 
 
-    <router-view/>    
-
-
-
+    <router-view/> 
   </div>
 </template>
 
@@ -24,6 +21,14 @@ export default {
 </script>
 
 <style>
+
+input {
+    border-style: none;
+    font-size: larger;
+    background-color: #00ffff00;
+    width: 90%;
+}
+
 
 .title {
     font-size: small;
