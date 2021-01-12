@@ -33,10 +33,8 @@ export default {
 }
 .plan{
     width: 100%;
-    min-height: 64px;
-    /*background-color:#85ca98;*/
-    background: rgb(151,224,171);
-    background: linear-gradient(180deg, rgb(154 214 171) 0%, rgb(133 202 152) 100%);
+    min-height: 64px;    
+    background: linear-gradient(180deg, rgb(218 218 218) 0%, rgb(206 206 206) 100%);
     box-shadow: 1px 1px 3px #00000042, -1px -1px 3px #ffffff9e;
     border-radius: 5px;
     padding-top: 5px;   
@@ -45,7 +43,7 @@ export default {
 .back { 
     justify-content: space-between;
     display: flex;   
-    background-color: #7db38c;    
+    background-color: #cfe1e6;    
     border-radius: 6px;
     padding: 6px;
     margin: 4px;
@@ -59,14 +57,18 @@ export default {
 }
 
 .buttonplus {
-    background: linear-gradient(180deg, rgb(154 214 171) 0%, rgb(133 202 152) 100%);
+    background: linear-gradient(180deg, rgb(208 208 208) 0%, rgb(191 191 191) 100%);
     box-shadow: 1px 1px 3px #00000042, -1px -1px 3px #ffffff9e;
     border-radius: 5px;
     padding-left: 4px;
-    padding-right: 4px;
-    
+    padding-right: 4px;    
     cursor: pointer;
 }
+.buttoicon {
+    font-size: small;
+    font-weight: bold;
+}
+
 .button {font-size: small; padding: 3px 25px;}
 .buttonplus:active {
   color: white;
@@ -74,7 +76,7 @@ export default {
 }
 
 .linkpage {
-    color: #ffffff;
+    color: #797979;
     width: 100%;
     text-align: end;
     margin-right: 10px;
