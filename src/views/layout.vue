@@ -10,6 +10,7 @@
 </template>
 
 <script>
+
 export default {
     data(){
         return {
@@ -22,11 +23,17 @@ export default {
 
 <style>
 
-input {
+label {
+    font-size: small;
+    margin-left: 15px;
+}
+
+input, textarea {
+    color: #006382;
     border-style: none;
     font-size: larger;
     background-color: #00ffff00;
-    width: 90%;
+    width: 100%;
 }
 
 

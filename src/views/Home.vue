@@ -1,9 +1,6 @@
 <template>
 <div>
 
-
-  
-
   <div class="plan" style="padding-bottom:5px">
    <div class="head_box" v-for="i in categories" :key="i.id">     
     <div :class="dgclass(i.dif)" v-html="i.dif.toLocaleString()"></div>
@@ -71,6 +68,7 @@
 <script>
 import LineChart from '../components/chart'
 import Alert from '../components/alert'
+
 
 
 export default {
