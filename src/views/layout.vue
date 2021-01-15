@@ -23,6 +23,13 @@ export default {
 
 <style>
 
+.h2 {
+    text-align: end;    
+    margin: 0.5em;
+    font-size: x-large;
+    color: crimson;
+}
+
 label {
     font-size: small;
     margin-left: 15px;
@@ -85,6 +92,12 @@ input, textarea {
     padding-right: 4px;    
     cursor: pointer;
 }
+
+.button_large {
+    margin: 10px;
+    padding: 5px;
+}
+
 .buttoicon {
     font-size: small;
     font-weight: bold;
