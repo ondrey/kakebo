@@ -10,7 +10,7 @@ const routes = [
     children: [
       {
         path: '/',
-        name: 'Layout',
+        name: 'Home',
         component: () => import(/* webpackChunkName: "Home" */ '../views/Home.vue'),
         meta: {
           title: 'Монитор'

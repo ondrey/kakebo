@@ -23,6 +23,10 @@ export default {
 
 <style>
 
+button, button:hover, button:focus {
+  border-style: none;
+}
+
 .h2 {
     text-align: end;    
     margin: 0.5em;
