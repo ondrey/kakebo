@@ -27,11 +27,8 @@ button, button:hover, button:focus {
   border-style: none;
 }
 
-.h2 {
-    text-align: end;    
+.h2 {    
     margin: 0.5em;
-    font-size: x-large;
-    color: crimson;
 }
 
 label {
@@ -45,6 +42,10 @@ input, textarea {
     font-size: larger;
     background-color: #00ffff00;
     width: 100%;
+}
+
+::placeholder {
+  color:  #97bfca;
 }
 
 
