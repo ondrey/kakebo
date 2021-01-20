@@ -82,7 +82,7 @@ export default {
             };
 
             let store = trans.objectStore(objname);
-            store.put(obj);
+            store.put({...obj, created: new Date(), sinc:false});
 
         });
     
