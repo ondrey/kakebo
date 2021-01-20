@@ -47,6 +47,7 @@
 </template>
 
 <script>
+
 export default {
     data(){
         return {
@@ -62,6 +63,10 @@ export default {
             
             if (e.shiftKey) {
                 console.log(e,'<< shift')
+
+                this.$store.dispatch('addCategories', {amount_comment: this.amount_comment, amount_date: this.amount_date}).then(_ => {
+                    console.log(_, 'Вернуло промис')                    
+                })
             } else {
                 console.log(e, '>>>')
             }
