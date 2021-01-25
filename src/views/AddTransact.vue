@@ -1,30 +1,20 @@
 <template>
   <div>
-        <div class="plan" style="padding-bottom:5px" v-on:keyup.enter="submit">
 
-
-            <div style="    display: flex; justify-content: space-between; min-height: 0 !important;">
+        
+        <addform 
+            :form.sync="form"
+            :title="form.category.name"
+            @enter="saveTransact" 
+            @enter_shift="addGroupSave"
+            >
                 <button class="buttonplus button_large" tabindex="6" @click="$router.push('/')"> <span class="el-icon-caret-left buttoicon"></span> Отмена</button>
                 <div>
-                    <button class="buttonplus button_large" tabindex="4"> <span class="el-icon-circle-check buttoicon"></span> Сохранить</button>
-                    <button class="buttonplus button_large" tabindex="5"> <span class="el-icon-circle-plus-outline buttoicon"></span> В чек</button>
-                </div>
-                
-                
-            </div>
-        
-            <div class="back">
-                <div style="margin: 0.5em; width: 100%;">Дата платежа</div>
-                <input type="date" style="text-align: end;" id="amount_date" v-model="amount_date" tabindex="1" autocomplete="off">
-            </div>
-            
-            <div class="back" style="display: block;">
-                <input type="number" v-model="amount" id="amount" style="text-align:center; font-size: xxx-large;" tabindex="2" autofocus  placeholder="Стоимость" autocomplete="off">
-                <hr>
-                <input type="text" style="text-align: center;"  v-model="amount_comment" id="amount_comment" tabindex="3" placeholder="Ваш комментарий" autocomplete="off"/>
-            </div>
-                        
-        </div>
+                    <button class="buttonplus button_large" tabindex="4" @click="saveTransact"> <span class="el-icon-circle-check buttoicon"></span> Сохранить</button>
+                    <button class="buttonplus button_large" tabindex="5" @click="addGroupSave"> <span class="el-icon-circle-plus-outline buttoicon"></span> В чек</button>
+                </div>            
+        </addform>
+
         <div class="title">Нажмите <span style="color:crimson;">Enter</span> чтобы сохранить. Или <span style="color:crimson;">Shift+Enter</span>, чтобы добавить в чек</div>
 
 
@@ -47,33 +37,38 @@
 </template>
 
 <script>
+import Addform from "../components/addform";
 
 export default {
+    components:{
+        Addform
+    },
+
     data(){
         return {
-            amount: '',
-            amount_date: new Date().toISOString().split('T')[0],
-            amount_comment: '',
+            form:{
+                amount: null,
+                amount_date: new Date().toISOString().split('T')[0],
+                amount_comment: '',
+                category: {},
+            },
+
+            
             cur_chek: [{price: 115, text: 'Зубная паста', id: 1}, {price: 80, text: 'Морковь', id: 2}, {price: 458, text: 'Шампунь Шолдарс', id: 3},]
         }
     },
+    created(){
+        this.form.category = this.$route.params       
+    },
 
-    methods: {
-        submit(e){
-            
-            if (e.shiftKey) {
-                console.log(e,'<< shift')
-
-                this.$store.dispatch('addCategories', {amount_comment: this.amount_comment, amount_date: this.amount_date}).then(_ => {
-                    console.log(_, 'Вернуло промис')                    
-                })
-            } else {
-                console.log(e, '>>>')
-            }
+    methods:{
+        saveTransact(){
+            console.log('save', this.form)
+        },
+        addGroupSave(){
+            console.log('saveGroup')
         }
     }
-
-
 }
 </script>
 

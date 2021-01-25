@@ -5,7 +5,7 @@
    <div class="head_box" v-for="i in categories" :key="i.id">     
     <div :class="dgclass(i.dif)" v-html="i.dif.toLocaleString()"></div>
     <a href="#" class="linkpage">{{i.name}}</a>
-    <div class="buttonplus"><span class="el-icon-circle-plus-outline buttoicon"></span></div>
+    <div @click="$router.push({ name: 'New', params: i })" class="buttonplus"><span class="el-icon-circle-plus-outline buttoicon"></span></div>
   </div>
   </div>
       
