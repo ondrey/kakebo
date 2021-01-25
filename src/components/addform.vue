@@ -6,7 +6,7 @@
             </div>
         
             <div class="back">
-                <div style="margin: 0.5em; width: 100%; color: crimson;">Добавить в категорию "{{title}}"</div>
+                <div style="margin: 0.5em; width: 100%; color: crimson;">{{titleshow}}</div>
                 <input type="date" style="text-align: end;" id="amount_date" v-model="formshow.amount_date" tabindex="1" autocomplete="off" @input="onInput">
             </div>
             
@@ -29,7 +29,8 @@ export default {
                 amount_date: this.form.amount_date,
                 amount: this.form.amount,
                 amount_comment: this.form.amount_comment
-            }
+            },
+            titleshow: this.title
         }
     },
     methods:{

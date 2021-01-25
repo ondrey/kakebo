@@ -4,34 +4,34 @@
         
         <addform 
             :form.sync="form"
-            :title="form.category.name"
-            @enter="saveTransact" 
-            @enter_shift="addGroupSave"
+            :title="$route.params.name"
+            @enter="addGroupSave" 
+            @enter_shift="saveTransact"
             >
-                <button class="buttonplus button_large" tabindex="6" @click="$router.push('/')"> <span class="el-icon-caret-left buttoicon"></span> Отмена</button>
+                <button class="buttonplus button_large" tabindex="6" @click="$router.push('/')"> <span class="el-icon-caret-left buttoicon"></span> Назад</button>
                 <div>
-                    <button class="buttonplus button_large" tabindex="4" @click="saveTransact"> <span class="el-icon-circle-check buttoicon"></span> Сохранить</button>
-                    <button class="buttonplus button_large" tabindex="5" @click="addGroupSave"> <span class="el-icon-circle-plus-outline buttoicon"></span> В чек</button>
-                </div>            
+                    
+
+                    <button class="buttonplus button_large" tabindex="4" @click="saveTransact"> 
+                        <span class="el-icon-circle-check buttoicon"></span> Сохранить                        
+                    </button>
+                    
+                    <button class="buttonplus button_large" tabindex="5" @click="addGroupSave"> 
+                        <span class="el-icon-circle-plus-outline buttoicon"></span> Ещё
+                    </button>
+                </div>
         </addform>
 
-        <div class="title">Нажмите <span style="color:crimson;">Enter</span> чтобы сохранить. Или <span style="color:crimson;">Shift+Enter</span>, чтобы добавить в чек</div>
+        <div class="title">Нажмите <span style="color:crimson;">Enter</span> чтобы добавить еще.</div>
 
-
-        <div class="plan"> 
-            <div style="text-align: end;">
-                <span class="chek_summ">653 руб.</span> <button class="buttonplus button_large" tabindex="4"> <span class="el-icon-circle-check buttoicon"></span> Сохранить чек</button>
-            </div>
+        
             
-            <div class="back" style="display: block; padding: 1em;">                
-                <div v-for="ch in cur_chek" :key="ch.id" class="chek_element"> {{ch.price}}  <span class="chek_text"> {{ch.text}} </span></div>                        
-            </div>
-                    
-        </div>       
 
-
-
-        <div class="title">Текущий чек</div>
+               <div class="head_box" v-for="ch in chek" :key="ch.id">     
+                <div v-html="ch.amount.toLocaleString()"></div>
+                <span class="linkpage">{{ch.amount_comment}}</span>
+               </div>
+        
 
   </div>
 </template>
@@ -50,15 +50,17 @@ export default {
                 amount: null,
                 amount_date: new Date().toISOString().split('T')[0],
                 amount_comment: '',
-                category: {},
+                category: null
             },
-
-            
-            cur_chek: [{price: 115, text: 'Зубная паста', id: 1}, {price: 80, text: 'Морковь', id: 2}, {price: 458, text: 'Шампунь Шолдарс', id: 3},]
+            chek: []
         }
     },
     created(){
-        this.form.category = this.$route.params       
+        if ('name' in this.$route.params) {
+            this.form.category = this.$route.params
+        } else {
+            this.$router.push({ name: 'Home' })
+        }
     },
 
     methods:{
@@ -67,6 +69,10 @@ export default {
         },
         addGroupSave(){
             console.log('saveGroup')
+            const res = {id: this.chek.length, ...this.form}
+            this.chek.unshift(res)
+            this.form.amount = ''
+            this.form.amount_comment = ''            
         }
     }
 }

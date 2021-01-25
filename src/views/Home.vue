@@ -78,7 +78,13 @@ export default {
   data(){
     return {
       alert: false,
-      datacollection: null,
+      datacollection: {
+        labels: ['12.05', '16.06', '09.10', '12.05', '16.06', '09.10'],
+        datasets: [
+            {data: [-789, -300, -456, 0, 123, 250]
+            ,label: 'Динамика накоплений'}, 
+          ]
+      },
       categories: [
         {name: 'Продукты', dif: 456, id: 1},
         {name: 'Хоз товары', dif: 0, id: 2},
@@ -88,15 +94,7 @@ export default {
       ]
     }
   },
-  mounted(){
-    this.datacollection = {
-        labels: ['12.05', '16.06', '09.10', '12.05', '16.06', '09.10'],
-        datasets: [
-            {data: [-789, -300, -456, 0, 123, 250]
-            ,label: 'Динамика накоплений'}, 
-          ]
-      }
-  },
+  
   methods: {     
       dgclass(dg){
         return dg < 0 ? 'dgminus' : 'dgnormal'

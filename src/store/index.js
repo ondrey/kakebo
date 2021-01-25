@@ -8,9 +8,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    categories: []
+    categories: []    
   },
   mutations: {
+
     ADD_CAT(state, cat) {
       state.categories.push(cat)
     }
@@ -27,7 +28,7 @@ export default new Vuex.Store({
         })
       })
     }
-  },
-  modules: {
   }
+
+
 })
