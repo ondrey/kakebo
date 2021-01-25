@@ -7,14 +7,15 @@
         
             <div class="back">
                 <div style="margin: 0.5em; width: 100%; color: crimson;">{{titleshow}}</div>
-                <input type="date" style="text-align: end;" id="amount_date" v-model="formshow.amount_date" tabindex="1" autocomplete="off" @input="onInput">
+                <input type="date" style="text-align: end;" id="amount_date" v-model="formshow.amount_date" tabindex="3" autocomplete="off" @input="onInput">
             </div>
             
             <div class="back" style="display: block;">
+                <input type="text" style="text-align: center;" ref="amount"  v-model="formshow.amount_comment" id="amount_comment" tabindex="1" placeholder="Ваш комментарий" autocomplete="off" @input="onInput"/>
+                <hr>
                 <input type="number" v-model="formshow.amount" 
                 id="amount" style="text-align:center; font-size: xxx-large;" tabindex="2" autofocus  placeholder="Стоимость" autocomplete="off" @input="onInput">
-                <hr>
-                <input type="text" style="text-align: center;"  v-model="formshow.amount_comment" id="amount_comment" tabindex="3" placeholder="Ваш комментарий" autocomplete="off" @input="onInput"/>
+                
             </div>
                         
         </div>
@@ -33,6 +34,7 @@ export default {
             titleshow: this.title
         }
     },
+
     methods:{
         onInput() {
             this.$emit('update:form', this.formshow)
@@ -42,6 +44,7 @@ export default {
                 this.$emit('enter_shift')
             } else {
                 this.$emit('enter')
+                this.$refs.amount.focus()
             }
         }
     }

@@ -5,18 +5,11 @@
         <addform 
             :form.sync="form"
             :title="$route.params.name"
-            @enter="addGroupSave" 
-            @enter_shift="saveTransact"
+            @enter="saveTransact" 
             >
                 <button class="buttonplus button_large" tabindex="6" @click="$router.push('/')"> <span class="el-icon-caret-left buttoicon"></span> Назад</button>
-                <div>
-                    
-
-                    <button class="buttonplus button_large" tabindex="4" @click="saveTransact"> 
-                        <span class="el-icon-circle-check buttoicon"></span> Сохранить                        
-                    </button>
-                    
-                    <button class="buttonplus button_large" tabindex="5" @click="addGroupSave"> 
+                <div>                    
+                    <button class="buttonplus button_large" tabindex="5" @click="saveTransact"> 
                         <span class="el-icon-circle-plus-outline buttoicon"></span> Ещё
                     </button>
                 </div>
@@ -65,14 +58,11 @@ export default {
 
     methods:{
         saveTransact(){
-            console.log('save', this.form)
-        },
-        addGroupSave(){
             console.log('saveGroup')
             const res = {id: this.chek.length, ...this.form}
             this.chek.unshift(res)
             this.form.amount = ''
-            this.form.amount_comment = ''            
+            this.form.amount_comment = ''          
         }
     }
 }
