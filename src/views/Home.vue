@@ -33,19 +33,19 @@
   <div class="plan">
     
     <div class="head_box">        
-    <a href="#" class="linkpage" style="text-align:left">Обязательные расходы</a>    
+    <a href="#/current-cost" class="linkpage" style="text-align:left">Обязательные расходы</a>    
       <span v-html="Number(15000).toLocaleString()" class="digiticon"></span>      
       <span class="el-icon-date digiticon"></span>
     </div>
 
     <div class="head_box" style="padding-bottom:5px">    
-    <a href="#" class="linkpage" style="text-align:left">Доходы</a>
+    <a href="#/current-income" class="linkpage" style="text-align:left">Доходы</a>
       <div v-html="Number(120000).toLocaleString()" class="digiticon"></div>
       <span class="el-icon-money digiticon"></span>
     </div>
 
     <div class="head_box" style="padding-bottom:5px">    
-    <a href="#" class="linkpage" style="text-align:left">Бюджет по категориям</a>
+    <a href="#/budget-category" class="linkpage" style="text-align:left">Бюджет по категориям</a>
       <div v-html="Number(105000).toLocaleString()" class="digiticon"></div>
       <span class="el-icon-s-operation digiticon"></span>
     </div>

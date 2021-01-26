@@ -31,7 +31,15 @@ const routes = [
         meta: {
           title: 'Новый расход'
         }
-      }      
+      },
+      {
+        path: 'current-cost',
+        component: () => import(/* webpackChunkName: "CurrentCost" */ '../views/CurrentCost.vue'),
+        name: 'CurrentCost',
+        meta: {
+          title: 'Обязательные расходы'
+        }
+      }
     ],
   }
 ]

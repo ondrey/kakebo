@@ -36,6 +36,8 @@ label {
     margin-left: 15px;
 }
 
+
+
 input, textarea {
     color: #006382;
     border-style: none;
@@ -46,6 +48,10 @@ input, textarea {
 
 ::placeholder {
   color:  #97bfca;
+}
+
+.crimson_lite {
+  color: #da8898;
 }
 
 
@@ -81,6 +87,7 @@ input, textarea {
     padding: 3px;
     margin: 4px;
     box-shadow: inset -1px -1px 1px rgb(255 255 255 / 59%), inset 1px 1px 1px rgb(0 0 0 / 15%);
+    color: #929292;
 }
 
 .back_jambo {

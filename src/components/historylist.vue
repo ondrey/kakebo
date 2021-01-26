@@ -1,11 +1,9 @@
 <template>
   <div class="plan">     
 
-   <div class="head_box" v-for="row in list" :key="row.id">     
+   <div class="head_box" v-for="row in list" :key="row">
     
-    <div class="buttonplus"><span class="el-icon-delete buttoicon"></span></div>
-    <div v-html="row.amount.toLocaleString()"></div>
-    <span class="linkpage">{{row.category}}</span>
+    {{row}}
     
   </div>
 
@@ -19,6 +17,25 @@ export default {
         return {
             btn_del: this.delete_show,
         }
+    },
+    created(){
+        this.list = [
+            {'21.02.2021': [
+            {cat:'Категория', amount: 45.98, comment: 'Красткое описание если есть'}, 
+            {cat:'Категория2', amount: 454.98, comment: 'Tесли есть'},
+            {cat:'Категория3', amount: 600.00, comment: 'Красткое описание '}
+            ]},
+            {'22.02.2021': [
+            {cat:'Категория', amount: 45.98, comment: 'Красткое описание если есть'}, 
+            {cat:'Категория2', amount: 454.98, comment: 'Tесли есть'},
+            {cat:'Категория3', amount: 600.00, comment: 'Красткое описание '}
+            ]},
+            {'23.02.2021': [
+            {cat:'Категория', amount: 45.98, comment: 'Красткое описание если есть'}, 
+            {cat:'Категория2', amount: 454.98, comment: 'Tесли есть'},
+            {cat:'Категория3', amount: 600.00, comment: 'Красткое описание '}
+            ]}            
+            ]
     },
     methods:{
         del_record(id){

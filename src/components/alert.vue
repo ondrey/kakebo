@@ -3,7 +3,7 @@
     <div class="infobable" v-if="visible">
     <div style="font-size: x-large;">{{title}}</div>
     <slot></slot>
-    <div @click="visible=false" class="buttonplus" style="padding: 5px; margin-top: 11px;"><span class="el-icon-circle-check  buttoicon" ></span>{{button_text}}</div>
+    <div v-show="button_text" @click="$emit('update:visible', false)" class="buttonplus" style="padding: 5px; margin-top: 11px;"><span class="el-icon-circle-check  buttoicon" ></span>{{button_text}}</div>
     </div>
 </transition>
     
@@ -29,8 +29,6 @@ export default {
     padding-top: 32px;
     box-shadow: 0px 9px 4px #828282;
     color: crimson;
-    font-size: small;
-    text-align: center;
 }
 
 .bounce-enter-active {

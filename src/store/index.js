@@ -14,6 +14,9 @@ export default new Vuex.Store({
 
     ADD_CAT(state, cat) {
       state.categories.push(cat)
+    },
+    ADD_PAY(state) {
+      console.log(state)
     }
   },
   actions: {
@@ -27,7 +30,19 @@ export default new Vuex.Store({
           reject('Не удалось добавить категорию')
         })
       })
-    }
+    },
+
+    addPayments({ commit }, pay = {}) {
+
+      return new Promise((resolve, reject) => {
+        idb.save('payments', pay).then(()=>{
+          commit('ADD_PAY', pay)
+          resolve(pay)
+        }).catch(()=>{
+          reject('Не удалось добавить платёж в базу')
+        })
+      })
+    }    
   }
 
 
