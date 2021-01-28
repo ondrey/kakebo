@@ -59,14 +59,14 @@ export default {
     methods:{
         saveTransact(){
 
-            this.$store.dispatch('addPayments', {...this.form, category: this.$route.params}).then((res) => {
-                console.log(res)
+            this.$store.dispatch('addPayments', {...this.form, category: this.$route.params}).then(() => {
+                const res = {id: this.chek.length, ...this.form}            
+                this.chek.unshift(res)
+                this.form.amount = ''
+                this.form.amount_comment = ''  
             })
             
-            const res = {id: this.chek.length, ...this.form}            
-            this.chek.unshift(res)
-            this.form.amount = ''
-            this.form.amount_comment = ''          
+        
         }
     }
 }

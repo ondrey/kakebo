@@ -8,7 +8,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    categories: []    
+    categories: [],
+    plans: []
   },
   mutations: {
 
@@ -17,6 +18,10 @@ export default new Vuex.Store({
     },
     ADD_PAY(state) {
       console.log(state)
+    }, 
+    ADD_PLAN(state, plan) {
+      
+      state.plans.push(plan)
     }
   },
   actions: {
@@ -42,7 +47,19 @@ export default new Vuex.Store({
           reject('Не удалось добавить платёж в базу')
         })
       })
-    }    
+    },
+
+    addPlans({ commit }, plan = {}) {
+      return new Promise((resolve, reject) => {
+        idb.save('plans', plan).then(()=>{
+          commit('ADD_PLAN', plan)
+          resolve(plan)
+        }).catch(()=>{
+          reject('Не удалось добавить планируемый платёж')
+        })
+      })
+    },    
+
   }
 
 

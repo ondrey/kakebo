@@ -43,6 +43,7 @@ export default {
             if (event.shiftKey) {
                 this.$emit('enter_shift')
             } else {
+                console.log(this.formshow, '<< component')
                 this.$emit('enter')
                 this.$refs.amount.focus()
             }
