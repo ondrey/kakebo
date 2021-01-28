@@ -87,7 +87,7 @@ input, textarea {
     padding: 3px;
     margin: 4px;
     box-shadow: inset -1px -1px 1px rgb(255 255 255 / 59%), inset 1px 1px 1px rgb(0 0 0 / 15%);
-    color: #929292;
+    color: #797979;
 }
 
 .back_jambo {

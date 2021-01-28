@@ -7,7 +7,7 @@
                     <div class="back" style="width: 100%">
                         
                         <span style="padding: 3px;">
-                            <span class="crimson_lite">48 963</span> <br>
+                            <span class="crimson_lite">{{ sum_planes }}</span> <br>
                             <span style="font-size: small">Сумма по обязательным платежам</span> 
                         </span>
 
@@ -21,7 +21,7 @@
                 
 
 
-                <list :delete_show="true" :list="list"></list>
+                <list :delete_show="true" :list="plans" @delete_record="delete_plan"></list>
 
                 <div class="title"><strong>*</strong> - только для текущего месяца</div>
 
@@ -51,23 +51,24 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 import Addform from "../components/addform"
 import Alert from '../components/alert'
-import List from "../components/historylist";
+import List from "../components/historylist"
 
-export default {
+export default {    
     components:{
         Addform, Alert, List
     },
+
+    computed: {
+        ...mapGetters(['plans', 'sum_planes'])
+    },
+
     data(){
-        return {    
-            list: [
-            {amount_date: '12.05.1998', amount: 356.45, amount_comment: 'Крот средство для канализации', category_name: 'Хоз. Расходы', mark: true, id: 0},
-            {amount_date: '11.05.1998', amount: 200, amount_comment: 'Зубная паста', category_name: 'Хоз. Расходы', mark: false, id: 1},
-            {amount_date: '10.05.1998', amount: 10000.98, amount_comment: 'Кварплата', category_name: 'Комунальные платежи', mark: true, id: 2}
-            ],
-            alert: false,
-            
+        return {
+            alert: false,            
             form: {
                 amount_date: new Date().toISOString().split('T')[0],
                 amount: null,
@@ -75,15 +76,21 @@ export default {
             }
         }
     },
+    created(){
+        this.$store.dispatch('getPlans')
+    },
     methods:{
         add_plan() {
-            this.$store.dispatch('addPlans', this.form).then(() => {
+            this.$store.dispatch('addPlans', {...this.form}).finally(()=>{
                 this.form.amount = ''
                 this.form.amount_comment = ''
                 this.form.amount_date = new Date().toISOString().split('T')[0]
-                this.alert = false     
-            })            
+                this.alert = false
+            })
                     
+        },
+        delete_plan(id){            
+            this.$store.dispatch('deletePlan', id)
         }
     }
 

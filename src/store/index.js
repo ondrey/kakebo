@@ -9,7 +9,20 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     categories: [],
-    plans: []
+    plans: [],
+  },
+  getters: {
+    plans: state => {
+      return state.plans.map((val)=>{
+        return {...val, id: val.id_plan}
+      })
+    },
+
+    sum_planes: state => {
+      return state.plans.reduce((acc, cur)=> {
+        return acc + Number(cur.amount)
+      }, 0)
+    }
   },
   mutations: {
 
@@ -18,10 +31,20 @@ export default new Vuex.Store({
     },
     ADD_PAY(state) {
       console.log(state)
-    }, 
+    },
     ADD_PLAN(state, plan) {
-      
-      state.plans.push(plan)
+      state.plans.unshift(plan)
+    },
+
+    SET_PLANS(state, list) {
+      state.plans = list
+    },
+
+    DEL_PLAN(state, id) {
+      for (let ix = 0; ix < state.plans.length; ix++) {
+        const el = state.plans[ix];
+        if (el.id_plan == id) state.plans.splice(ix, 1);
+      }
     }
   },
   actions: {
@@ -50,15 +73,29 @@ export default new Vuex.Store({
     },
 
     addPlans({ commit }, plan = {}) {
+      
       return new Promise((resolve, reject) => {
         idb.save('plans', plan).then(()=>{
           commit('ADD_PLAN', plan)
+          
           resolve(plan)
         }).catch(()=>{
           reject('Не удалось добавить планируемый платёж')
         })
       })
     },    
+
+    getPlans({ commit }) {
+      idb.get('plans').then(plans=>{
+        commit('SET_PLANS', plans)
+      })
+    },
+
+    deletePlan({ commit }, id) {
+      idb.delete('plans', id).then(()=>{
+        commit('DEL_PLAN', id)
+      })
+    }
 
   }
 
