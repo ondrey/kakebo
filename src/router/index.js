@@ -47,7 +47,16 @@ const routes = [
         meta: {
           title: 'Плановые доходы'
         }
+      },
+      {
+        path: 'budget-cat',
+        component: () => import(/* webpackChunkName: "BudgetCat" */ '../views/Budget.vue'),
+        name: 'BudgetCat',
+        meta: {
+          title: 'Бюджет по категориям'
+        }
       }
+
       //
     ],
   }

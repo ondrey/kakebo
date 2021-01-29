@@ -45,7 +45,7 @@
     </div>
 
     <div class="head_box" style="padding-bottom:5px">    
-    <a href="#/budget-category" class="linkpage" style="text-align:left">Бюджет по категориям</a>
+    <a href="#/budget-cat" class="linkpage" style="text-align:left">Бюджет по категориям</a>
       <div v-html="Number(105000).toLocaleString()" class="digiticon"></div>
       <span class="el-icon-s-operation digiticon"></span>
     </div>

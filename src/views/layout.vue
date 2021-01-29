@@ -23,6 +23,17 @@ export default {
 
 <style>
 
+[class*="__runway"] {
+  background-color: #b7b7b7;
+}
+[class*="__bar"] {
+  background-color: #006382;
+}
+.el-slider__button {
+  border: 1px solid #006382;
+}
+
+
 button, button:hover, button:focus {
   border-style: none;
 }
