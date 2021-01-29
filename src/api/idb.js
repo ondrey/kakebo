@@ -31,7 +31,7 @@ export default {
         });
     },
     async delete(objname, id) {
-        console.log(id, '<<<<<<<<<<<')
+        
 
         let db = await this.getDb();
 

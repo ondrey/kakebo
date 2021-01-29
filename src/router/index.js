@@ -39,7 +39,16 @@ const routes = [
         meta: {
           title: 'Обязательные расходы'
         }
+      },
+      {
+        path: 'current-income',
+        component: () => import(/* webpackChunkName: "CurrentIncome" */ '../views/CurrentIncome.vue'),
+        name: 'CurrentIncome',
+        meta: {
+          title: 'Плановые доходы'
+        }
       }
+      //
     ],
   }
 ]

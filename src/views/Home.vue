@@ -34,13 +34,13 @@
     
     <div class="head_box">        
     <a href="#/current-cost" class="linkpage" style="text-align:left">Обязательные расходы</a>    
-      <span v-html="Number(15000).toLocaleString()" class="digiticon"></span>      
+      <span v-html="sum_costs" class="digiticon"></span>      
       <span class="el-icon-date digiticon"></span>
     </div>
 
     <div class="head_box" style="padding-bottom:5px">    
     <a href="#/current-income" class="linkpage" style="text-align:left">Доходы</a>
-      <div v-html="Number(120000).toLocaleString()" class="digiticon"></div>
+      <div v-html="sum_planes" class="digiticon"></div>
       <span class="el-icon-money digiticon"></span>
     </div>
 
@@ -66,6 +66,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 import LineChart from '../components/chart'
 import Alert from '../components/alert'
 
@@ -75,6 +77,12 @@ export default {
   components: {
       LineChart, Alert
   },  
+  computed: {
+    ...mapGetters(['sum_costs', 'sum_planes'])
+  },
+  created(){
+    this.$store.dispatch('getPlans')
+  },
   data(){
     return {
       alert: false,

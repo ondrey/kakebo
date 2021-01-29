@@ -10,19 +10,35 @@ export default new Vuex.Store({
   state: {
     categories: [],
     plans: [],
+
   },
   getters: {
     plans: state => {
+      return state.plans.map((val)=>{                
+        return {...val, id: val.id_plan}
+      }).filter(_=>{
+        return !_.cost
+      })
+    },
+    plans_cost: state => {
       return state.plans.map((val)=>{
         return {...val, id: val.id_plan}
+      }).filter(_=>{
+        return _.cost
       })
     },
 
     sum_planes: state => {
       return state.plans.reduce((acc, cur)=> {
-        return acc + Number(cur.amount)
+        return !cur.cost ? acc + Number(cur.amount) : acc + 0
       }, 0)
-    }
+    },
+    sum_costs: state => {
+      return state.plans.reduce((acc, cur)=> {
+        return cur.cost ? acc + Number(cur.amount) : acc + 0
+      }, 0)
+    }    
+
   },
   mutations: {
 
@@ -74,10 +90,17 @@ export default new Vuex.Store({
 
     addPlans({ commit }, plan = {}) {
       
+      
+
       return new Promise((resolve, reject) => {
-        idb.save('plans', plan).then(()=>{
+        if (plan.cost) {
+          plan.amount = 0 - Number(plan.amount)
+        } else {
+          plan.amount = Number(plan.amount)
+        }
+
+        idb.save('plans', plan).then(()=>{          
           commit('ADD_PLAN', plan)
-          
           resolve(plan)
         }).catch(()=>{
           reject('Не удалось добавить планируемый платёж')
