@@ -13,6 +13,10 @@ export default new Vuex.Store({
 
   },
   getters: {
+    budget: (state, gette)=>{
+      return gette.sum_planes + gette.sum_costs
+    },
+
     plans: state => {
       return state.plans.map((val)=>{                
         return {...val, id: val.id_plan}
