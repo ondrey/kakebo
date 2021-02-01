@@ -71,6 +71,35 @@ export default {
         });
     },
 
+    async update(objname, id_name, id,  dict) {
+
+        let db = await this.getDb();
+
+        return new Promise(resolve => {
+
+            let trans = db.transaction([objname],'readwrite');
+            trans.oncomplete = () => {
+                resolve(cat);
+            };
+            
+            let store = trans.objectStore(objname); 
+            let cat = {};           
+            
+            store.openCursor().onsuccess = e => {
+                let cursor = e.target.result;
+                if (cursor) {
+                    
+                    if (cursor.value[id_name] === id) {                        
+                        cursor.update({...cursor.value, ...dict})
+                    }
+                    cat = cursor.value
+                    cursor.continue()
+                }
+            };
+
+        });
+    },    
+
     async save(objname, obj) {
 
         let db = await this.getDb();

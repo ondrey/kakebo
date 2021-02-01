@@ -13,8 +13,17 @@ export default new Vuex.Store({
 
   },
   getters: {
+    max_category_budget: (state, gette)=>{
+      return (gette.budget - gette.sum_budget_category)
+    },
+
     budget: (state, gette)=>{
       return gette.sum_planes + gette.sum_costs
+    },
+    categories: state => {
+      return state.categories.map((val)=>{                
+        return {...val, id: val.id_cat}
+      })
     },
 
     plans: state => {
@@ -41,11 +50,15 @@ export default new Vuex.Store({
       return state.plans.reduce((acc, cur)=> {
         return cur.cost ? acc + Number(cur.amount) : acc + 0
       }, 0)
-    }    
+    },
+    sum_budget_category: state => {
+      return state.categories.reduce((acc, cur)=> {
+        return acc + Number(cur.budget)
+      }, 0)
+    }
 
   },
   mutations: {
-
     ADD_CAT(state, cat) {
       state.categories.push(cat)
     },
@@ -58,6 +71,14 @@ export default new Vuex.Store({
 
     SET_PLANS(state, list) {
       state.plans = list
+    },
+
+    SET_CAT(state, list) {
+      state.categories = list
+    },
+
+    SET_BUDGET() {
+      console.log('SET_BUDGET')
     },
 
     DEL_PLAN(state, id) {
@@ -122,8 +143,19 @@ export default new Vuex.Store({
       idb.delete('plans', id).then(()=>{
         commit('DEL_PLAN', id)
       })
-    }
+    },
 
+    getCategory({ commit }) {
+      idb.get('categories').then(cats=>{
+        commit('SET_CAT', cats)
+      })      
+    },    
+
+    editBudget({ commit }, data) {
+      idb.update('categories', 'id_cat', data.id_cat, {budget: data.budget}).then(()=>{
+        commit('SET_BUDGET')
+      })
+    }
   }
 
 
