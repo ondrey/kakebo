@@ -76,6 +76,7 @@ export default {
   },
   created(){
     this.$store.dispatch('getPlans')
+    this.$store.dispatch('getPaymentsCurMonth')
   },
   data(){
     return {

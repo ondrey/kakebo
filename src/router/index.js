@@ -58,8 +58,22 @@ const routes = [
       }
 
       //
-    ],
-  }
+    ]
+  },
+  // {
+  //   path: '/wizard',
+  //   component: () => import(/* webpackChunkName: "wizard" */ '../views/wizard.vue'),
+  //   children: [
+  //     {
+  //       path: 'step1',
+  //       name: 'Step1',
+  //       component: () => import(/* webpackChunkName: "Step1" */ '../views/CurrentIncome.vue'),
+  //       meta: {
+  //         title: 'Монитор'
+  //       }
+  //     },
+  //   ]
+  // }
 ]
 
 const router = new VueRouter({

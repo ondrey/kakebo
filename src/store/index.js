@@ -10,6 +10,7 @@ export default new Vuex.Store({
   state: {
     categories: [],
     plans: [],
+    payments: []
 
   },
   getters: {
@@ -59,6 +60,9 @@ export default new Vuex.Store({
 
   },
   mutations: {
+    ADD_CURMONTH_PAY(state, pay) {
+      state.payments.push(pay)
+    },
     ADD_CAT(state, cat) {
       state.categories.push(cat)
     },
@@ -145,6 +149,21 @@ export default new Vuex.Store({
         commit('SET_PLANS', plans)
       })
     },
+
+    getPaymentsCurMonth({ commit }) {
+      idb.get('payments').then(payments=>{        
+        
+        payments.forEach(el => {          
+          const amount_date = new Date(el.amount_date)
+          const cur_date = new Date()
+                    
+          if (amount_date.getMonth() == cur_date.getMonth() && amount_date.getFullYear() == cur_date.getFullYear()) {
+            commit('ADD_CURMONTH_PAY', el)
+          }
+        })
+
+      })
+    },    
 
     deletePlan({ commit }, id) {
       idb.delete('plans', id).then(()=>{
