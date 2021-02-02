@@ -86,7 +86,14 @@ export default new Vuex.Store({
         const el = state.plans[ix];
         if (el.id_plan == id) state.plans.splice(ix, 1);
       }
+    },
+    DEL_CAT(state, id) {
+      for (let ix = 0; ix < state.categories.length; ix++) {
+        const el = state.categories[ix];
+        if (el.id_cat == id) state.categories.splice(ix, 1);
+      }
     }
+
   },
   actions: {
     addCategories({ commit }, categori = {}) {
@@ -144,6 +151,12 @@ export default new Vuex.Store({
         commit('DEL_PLAN', id)
       })
     },
+    deleteCategory({ commit }, id) {
+      idb.delete('categories', id).then(()=>{
+        commit('DEL_CAT', id)
+      })
+    },
+
 
     getCategory({ commit }) {
       idb.get('categories').then(cats=>{

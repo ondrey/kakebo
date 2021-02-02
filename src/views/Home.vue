@@ -33,21 +33,15 @@
   <div class="plan">
     
     <div class="head_box">        
-    <a href="#/current-cost" class="linkpage" style="text-align:left">Обязательные расходы</a>    
-      <span v-html="sum_costs" class="digiticon"></span>      
-      <span class="el-icon-date digiticon"></span>
+      <a href="#/current-cost" class="linkpage" style="text-align:left">Обязательные расходы</a>    
     </div>
 
     <div class="head_box" style="padding-bottom:5px">    
-    <a href="#/current-income" class="linkpage" style="text-align:left">Доходы</a>
-      <div v-html="sum_planes" class="digiticon"></div>
-      <span class="el-icon-money digiticon"></span>
+      <a href="#/current-income" class="linkpage" style="text-align:left">Доходы</a>      
     </div>
 
     <div class="head_box" style="padding-bottom:5px">    
-    <a href="#/budget-cat" class="linkpage" style="text-align:left">Категории</a>
-      <div v-html="budget" class="digiticon"></div>
-      <span class="el-icon-s-operation digiticon"></span>
+      <a href="#/budget-cat" class="linkpage" style="text-align:left">Бюджет и план накоплений</a>
     </div>
 
   </div>
@@ -78,8 +72,7 @@ export default {
       LineChart, Alert
   },  
   computed: {
-    ...mapGetters(['sum_costs', 'sum_planes']),
-    ...mapGetters(['budget'])
+    ...mapGetters(['sum_costs', 'sum_planes'])
   },
   created(){
     this.$store.dispatch('getPlans')

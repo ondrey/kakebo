@@ -12,12 +12,13 @@
 
                         <span style="padding: 3px;">
                             
-                            <span style="font-size: small">После вычета обязательных платежей у Вас: <span class="crimson_lite">{{budget}}</span></span>
+                            <span style="font-size: small"><span class="crimson_lite">{{budget}}</span> После вычета обязательных платежей;</span> <br>
+                            <span style="font-size: small"><span class="crimson_lite">{{sum_budget_category}}</span> Сумма по категориям.</span>
                             
                         </span> 
 
                         <span style="padding: 3px; text-align: end;">
-                            <span style="font-size: small">План накоплений <span class="crimson_lite" style="font-size: xx-large;">{{budget - sum_budget_category}}</span></span>
+                            <span style="font-size: small">План накоплений: <br>  <span style="font-size: xx-large;">{{budget - sum_budget_category}}</span></span>
                             
                         </span>
                     </div>
@@ -29,7 +30,14 @@
                 <div v-for="cat in categories" :key="cat.id_cat">
                     <div class="plan" style="margin-top: 1em" >
                         <div style="display: flex; justify-content: space-between;">
-                            <button class="buttonplus delbtn" style="margin-left: 5px;" > <span class="el-icon-delete buttoicon"></span></button>
+                            <button 
+                                class="buttonplus delbtn" 
+                                style="margin-left: 5px;"
+                                @click="delrec(cat.id_cat)"> 
+
+                                <span class="el-icon-delete buttoicon"></span>
+                            </button>
+
                             <div class="back" style="width:100%">
                                 {{cat.name_cat}}
                                 <span class="crimson_lite">{{cat.budget}}</span>
@@ -94,6 +102,9 @@ export default {
         this.$store.dispatch('getCategory')
     },
     methods:{
+        delrec(id){
+            this.$store.dispatch('deleteCategory', id)
+        },
         change_budget(data){            
             this.$store.dispatch('editBudget', data)
         },

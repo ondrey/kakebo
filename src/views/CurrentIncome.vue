@@ -7,8 +7,9 @@
                     <div class="back" style="width: 100%">
                         
                         <span style="padding: 3px;">
-                            <span class="crimson_lite" style="font-size: xxx-large;">{{ sum_planes }}</span> <br>
-                            <span style="font-size: small">Доход сумарно</span> 
+                            <span style="font-size: small">Доход сумарно</span> <br>
+                            <span style="font-size: xx-large;">{{ sum_planes }}</span> 
+                            
                         </span>
 
                     </div>
