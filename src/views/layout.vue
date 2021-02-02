@@ -114,6 +114,7 @@ input, textarea {
     padding-left: 4px;
     padding-right: 4px;    
     cursor: pointer;
+    color: #006382;
 }
 
 .button_large {

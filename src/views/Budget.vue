@@ -1,44 +1,50 @@
 <template>
   <div>
                 <div class="plan" style="min-height:0">
+                    <div style="text-align: end">
+                    <button class="buttonplus button_large" tabindex="5"
+                        @click="alert=!alert"> 
+                        <span class="el-icon-circle-plus-outline buttoicon"></span> Добавить категорию
+                    </button>
+                    </div>
+
                     <div class="back">
-                        
+
                         <span style="padding: 3px;">
-                            <span class="crimson_lite" style="font-size: xx-large;">{{budget}}</span> <br>
-                            <span style="font-size: small">Сумма бюджетных средств</span>
+                            
+                            <span style="font-size: small">После вычета обязательных платежей у Вас: <span class="crimson_lite">{{budget}}</span></span>
+                            
                         </span> 
 
                         <span style="padding: 3px; text-align: end;">
-                            <span class="crimson_lite" style="font-size: xx-large;">{{budget - sum_budget_category}}</span> <br>
-                            <span style="font-size: small">Осталось</span>
-                        </span>                         
-
-
-                    </div>
-                    
-                    <div style="text-align: end">
-                        <button class="buttonplus button_large" tabindex="5" style="color: forestgreen;  " 
-                            @click="alert=!alert"> 
-                            <span class="el-icon-circle-plus-outline buttoicon"></span> 
-                        </button>
+                            <span style="font-size: small">План накоплений <span class="crimson_lite" style="font-size: xx-large;">{{budget - sum_budget_category}}</span></span>
+                            
+                        </span>
                     </div>
                     
 
                 </div>
-                <div class="title">Распределите бюджет по категориям</div>
+                <div class="title">Планирование расходов</div>
 
+                <div v-for="cat in categories" :key="cat.id_cat">
+                    <div class="plan" style="margin-top: 1em" >
+                        <div style="display: flex; justify-content: space-between;">
+                            <button class="buttonplus delbtn" style="margin-left: 5px;" > <span class="el-icon-delete buttoicon"></span></button>
+                            <div class="back" style="width:100%">
+                                {{cat.name_cat}}
+                                <span class="crimson_lite">{{cat.budget}}</span>
+                            </div>
 
-                <div class="plan" style="margin-top: 1em" v-for="cat in categories" :key="cat.id_cat">
-                    <div class="back">
-                        {{cat.name_cat}}
-                        <span class="crimson_lite" style="font-size: x-large;">{{cat.budget}}</span>
                         </div>
+                        <el-slider :show-tooltip="false" style="margin: 0 1em 0 1em;" v-model="cat.budget" @change="change_budget(cat)"
+                        :max="cat.budget+max_category_budget"
+                        ></el-slider>
+                        
 
-                    <el-slider :show-tooltip="false" style="margin: 0 1em 0 1em;" v-model="cat.budget" @change="change_budget(cat)"
-                    :max="max_category_budget"
-                    ></el-slider>
 
+                    </div>
                 </div>
+                
 
 
 
@@ -70,7 +76,7 @@ import Alert from '../components/alert'
 
 export default {
     computed: {
-        ...mapGetters(['budget', 'sum_budget_category', 'max_category_budget']), 
+        ...mapGetters(['budget', 'sum_budget_category', 'max_category_budget']),
         ...mapState(['categories'])
     },
     components: {

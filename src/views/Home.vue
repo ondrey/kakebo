@@ -45,8 +45,8 @@
     </div>
 
     <div class="head_box" style="padding-bottom:5px">    
-    <a href="#/budget-cat" class="linkpage" style="text-align:left">Бюджет по категориям</a>
-      <div v-html="Number(105000).toLocaleString()" class="digiticon"></div>
+    <a href="#/budget-cat" class="linkpage" style="text-align:left">Категории</a>
+      <div v-html="budget" class="digiticon"></div>
       <span class="el-icon-s-operation digiticon"></span>
     </div>
 
@@ -78,7 +78,8 @@ export default {
       LineChart, Alert
   },  
   computed: {
-    ...mapGetters(['sum_costs', 'sum_planes'])
+    ...mapGetters(['sum_costs', 'sum_planes']),
+    ...mapGetters(['budget'])
   },
   created(){
     this.$store.dispatch('getPlans')
