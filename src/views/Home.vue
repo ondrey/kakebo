@@ -32,15 +32,16 @@
   <div class="plan">
     
     <div class="head_box">        
-      <a href="#/current-cost" class="linkpage" style="text-align:left">Обязательные расходы</a>    
+      <a href="#/current-cost" class="linkpage" style="text-align:left">Ежемесячные траты</a>  {{sum_costs.toLocaleString()}} 
     </div>
 
-    <div class="head_box" style="padding-bottom:5px">    
-      <a href="#/current-income" class="linkpage" style="text-align:left">Доходы</a>      
-    </div>
 
     <div class="head_box" style="padding-bottom:5px">    
-      <a href="#/budget-cat" class="linkpage" style="text-align:left">Бюджет и план накоплений</a>
+      <a href="#/current-income" class="linkpage" style="text-align:left">Доходы</a>   {{sum_planes.toLocaleString()}}   
+    </div>
+
+    <div class="head_box" style="padding-bottom:5px" v-show="sum_planes">    
+      <a href="#/budget-cat" class="linkpage" style="text-align:left">План</a> {{(budget - sum_budget_category).toLocaleString()}}
     </div>
 
   </div>
@@ -71,11 +72,11 @@ export default {
   created(){
     this.$store.dispatch('getPlans')
     this.$store.dispatch('getPaymentsCurMonth')
-    this.$store.dispatch('getCategory')
+    this.$store.dispatch('getCategory')    
   },
   data(){
     return {
-      alert: false,
+      alert: false, 
       datacollection: {
         labels: ['12.05', '16.06', '09.10', '12.05', '16.06', '09.10'],
         datasets: [
