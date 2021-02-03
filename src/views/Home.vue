@@ -29,15 +29,19 @@
   
 
   
-  <div class="plan">
-    
+  <div class="plan">    
+    <div v-show="!is_complate" style="padding: 0.5em; color: crimson; text-align: center; font-size: small;"> 
+      
+      Для начала отслеживания накоплений, заполните данные по своим ежемесячным платежам и даходам. 
+    </div>
+
     <div class="head_box">        
-      <a href="#/current-cost" class="linkpage" style="text-align:left">Ежемесячные траты</a>  {{sum_costs.toLocaleString()}} 
+      <a href="#/current-cost" class="linkpage" style="text-align:left">Ежемесячные траты</a>  {{sum_costs.toLocaleString()}}
     </div>
 
 
     <div class="head_box" style="padding-bottom:5px">    
-      <a href="#/current-income" class="linkpage" style="text-align:left">Доходы</a>   {{sum_planes.toLocaleString()}}   
+      <a href="#/current-income" class="linkpage" style="text-align:left">Доходы</a>  {{sum_planes.toLocaleString()}}  
     </div>
 
     <div class="head_box" style="padding-bottom:5px" v-show="sum_planes">    

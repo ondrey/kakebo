@@ -13,12 +13,11 @@
                         </span>
 
                     </div>
-                    <button class="buttonplus button_large" tabindex="5" style="color: forestgreen" 
+                    <button class="buttonplus button_large" tabindex="5"
                         @click="alert=!alert"> 
-                    <span class="el-icon-circle-plus-outline buttoicon"></span> 
+                    <span class="el-icon-circle-plus-outline buttoicon"></span> Добавить
                     </button>
-                </div>
-                <div class="title">Добавить платёж</div>
+                </div>                
                 
 
 
