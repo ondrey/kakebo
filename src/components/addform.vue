@@ -5,7 +5,7 @@
             <slot></slot>                
             </div>
         
-            <div class="back">
+            <div class="back" v-show="!hidden_dateinput">
                 <div style="margin: 0.5em; width: 100%;" class="crimson_lite">{{titleshow}}</div>
                 <input type="date" style="text-align: end;" id="amount_date" v-model="formshow.amount_date" tabindex="3" autocomplete="off" @input="onInput">
             </div>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-    props: ['form', 'title'], 
+    props: ['form', 'title', 'hidden_dateinput'], 
     data(){
         return {
             formshow: {

@@ -3,19 +3,22 @@
             
             <div class="back" style="display: block; padding: 10px;">
                 <div  v-for="row in list" :key="row.id">
-                    <hr />  
+                      
                     <div class="listcost">
                         <button class="buttonplus delbtn" v-show="btn_del" @click="del_record(row.id)"> <span class="el-icon-delete buttoicon"></span></button>
-                        <span style="padding-left: 5px;">
-                            <div>{{row.category_name}}</div>
-                            <div style="font-size:small; width: max-content;">{{row.amount_date}}<strong v-show="row.mark">*</strong></div> 
+                        <slot v-bind:row="row">
+                            <span style="padding-left: 5px;">
+                                <div>{{row.category_name}}</div>
+                                <div style="font-size:small; width: max-content;">{{row.amount_date}}<strong v-show="row.mark">*</strong></div> 
                             </span>
-                        <span 
-                            style="margin-right: 8px; width: 100%; text-align: end;">                        
-                            <div class="crimson_lite">{{row.amount}}</div>                        
-                            <div style="font-size:small">{{row.amount_comment}}</div>                        
-                        </span>   
+                            <span 
+                                style="margin-right: 8px; width: 100%; text-align: end;">                        
+                                <div class="crimson_lite">{{row.amount}}</div>                        
+                                <div style="font-size:small">{{row.amount_comment}}</div>                        
+                            </span>   
+                        </slot>                        
                     </div>
+                    <hr />
                 </div>
             </div>
                             
