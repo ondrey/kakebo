@@ -4,7 +4,7 @@
         
         <addform 
             :form.sync="form"
-            :title="$route.params.name"
+            :title="$route.params.name_cat"
             @enter="saveTransact" 
             >
                 <button class="buttonplus button_large" tabindex="6" @click="$router.push('/')"> <span class="el-icon-caret-left buttoicon"></span> Назад</button>
@@ -49,7 +49,7 @@ export default {
         }
     },
     created(){
-        if ('name' in this.$route.params) {
+        if ('name_cat' in this.$route.params) {
             this.form.category = this.$route.params
         } else {
             this.$router.push({ name: 'Home' })

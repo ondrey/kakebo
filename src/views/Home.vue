@@ -1,15 +1,15 @@
 <template>
 <div>
 
-  <div class="plan" style="padding-bottom:5px">
-   <div class="head_box" v-for="i in categories" :key="i.id">     
+  <div class="plan" style="padding-bottom:5px" v-show="sum_budget_category">
+   <div class="head_box" v-for="i in categories" :key="i.id">         
     <div :class="dgclass(i.dif)" v-html="i.dif.toLocaleString()"></div>
-    <a href="#" class="linkpage">{{i.name}}</a>
+    <a href="#" class="linkpage">{{i.name_cat}}</a>
     <div @click="$router.push({ name: 'New', params: i })" class="buttonplus"><span class="el-icon-circle-plus-outline buttoicon"></span></div>
   </div>
   </div>
       
-  <div class="title">Расходы по категориям</div>
+  <div class="title" v-show="sum_budget_category">Расходы по категориям</div>
   
   
   <div class="plan">
@@ -17,12 +17,12 @@
     <div class="back back_jambo">
       
       <span style="font-size: small;">Остаток</span>
-      <span>456 879</span>
+      <span>{{(sum_budget_category - sum_payments).toLocaleString()}}</span>
       
-      <span style="font-size: small; text-align: end;"> 43 121 Расход <br> 500 000 Бюджет  </span>
+      <span style="font-size: small; text-align: end;"> {{sum_payments.toLocaleString()}} Расход <br> {{sum_budget_category.toLocaleString()}} Бюджет  </span>
     </div>
 
-    <div class="buttonplus button_close_period" @click="alert = !alert"> <span class="el-icon-refresh buttoicon"></span> Закрыть период </div>
+    <div class="buttonplus button_close_period" @click="alert = !alert"> <span class="el-icon-refresh buttoicon"></span> Накопить </div>
    
 
   </div>
@@ -72,11 +72,12 @@ export default {
       LineChart, Alert
   },  
   computed: {
-    ...mapGetters(['sum_costs', 'sum_planes'])
+    ...mapGetters(['sum_costs', 'sum_planes', 'sum_payments', 'sum_budget_category', 'categories', 'budget'])
   },
   created(){
     this.$store.dispatch('getPlans')
     this.$store.dispatch('getPaymentsCurMonth')
+    this.$store.dispatch('getCategory')
   },
   data(){
     return {
@@ -88,13 +89,6 @@ export default {
             ,label: 'Динамика накоплений'}, 
           ]
       },
-      categories: [
-        {name: 'Продукты', dif: 456, id: 1},
-        {name: 'Хоз товары', dif: 0, id: 2},
-        {name: 'Автомобиль', dif: 500, id: 3},
-        {name: 'Развлечения', dif: -500, id: 4},
-        {name: 'Ремонт', dif: 456, id: 5}
-      ]
     }
   },
   

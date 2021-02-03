@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import idb from '@/api/idb';
 
 
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -11,7 +10,6 @@ export default new Vuex.Store({
     categories: [],
     plans: [],
     payments: []
-
   },
   getters: {
     max_category_budget: (state, gette)=>{
@@ -21,9 +19,11 @@ export default new Vuex.Store({
     budget: (state, gette)=>{
       return gette.sum_planes + gette.sum_costs
     },
+
+
     categories: state => {
       return state.categories.map((val)=>{                
-        return {...val, id: val.id_cat}
+        return {...val, id: val.id_cat, dif: val.budget - val.sumpay}
       })
     },
 
@@ -56,12 +56,25 @@ export default new Vuex.Store({
       return state.categories.reduce((acc, cur)=> {
         return acc + Number(cur.budget)
       }, 0)
-    }
+    },
+    sum_payments: state => {
+      return state.payments.reduce((acc, cur)=> {
+        return acc + Number(cur.amount)
+      }, 0)
+    },
 
   },
   mutations: {
     ADD_CURMONTH_PAY(state, pay) {
       state.payments.push(pay)
+
+      for (let ix = 0; ix < state.categories.length; ix++) {
+        const el = state.categories[ix];        
+        if(el.id_cat == pay.category.id_cat) {
+          state.categories[ix].sumpay += Number(pay.amount)
+        }
+      }
+      
     },
     ADD_CAT(state, cat) {
       state.categories.push(cat)
@@ -78,7 +91,9 @@ export default new Vuex.Store({
     },
 
     SET_CAT(state, list) {
-      state.categories = list
+      state.categories = list.map((vl)=>{
+        return {...vl, sumpay: 0}
+      })
     },
 
     SET_BUDGET() {

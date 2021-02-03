@@ -86,6 +86,7 @@ export default {
     computed: {
         ...mapGetters(['budget', 'sum_budget_category', 'max_category_budget']),
         ...mapState(['categories'])
+        
     },
     components: {
         Alert
@@ -112,8 +113,10 @@ export default {
         add_category(){
             this.$store.dispatch('addCategories', {name_cat: this.cat_name, budget: 0.0}).then(() => {                                       
                 this.cat_name = ''
-                this.alert = false              
+                this.alert = false
+                this.$store.dispatch('getCategory')
             })
+            
         }
     }
 
