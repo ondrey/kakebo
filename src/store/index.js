@@ -12,6 +12,9 @@ export default new Vuex.Store({
     payments: []
   },
   getters: {
+    is_complate: state =>{
+      return state.categories.length > 0 && state.plans.length > 0
+    },
     max_category_budget: (state, gette)=>{
       return (gette.budget - gette.sum_budget_category)
     },
@@ -23,7 +26,12 @@ export default new Vuex.Store({
 
     categories: state => {
       return state.categories.map((val)=>{                
-        return {...val, id: val.id_cat, dif: val.budget - val.sumpay}
+        return {...val, id: val.id_cat}
+      })
+    },
+    categories_dif: (state, gette) => {
+      return state.categories.map((val)=>{                    
+        return {...val, id: val.id_cat, dif: val.budget - gette.get_sum_category(val.id_cat)}
       })
     },
 
@@ -62,19 +70,17 @@ export default new Vuex.Store({
         return acc + Number(cur.amount)
       }, 0)
     },
+    get_sum_category: state => id => {      
+      return state.payments.reduce((acc, cur)=> {
+        return cur.category.id_cat == id ? acc + Number(cur.amount) : acc + 0
+      }, 0)
+
+    } 
 
   },
   mutations: {
     ADD_CURMONTH_PAY(state, pay) {
-      state.payments.push(pay)
-
-      for (let ix = 0; ix < state.categories.length; ix++) {
-        const el = state.categories[ix];        
-        if(el.id_cat == pay.category.id_cat) {
-          state.categories[ix].sumpay += Number(pay.amount)
-        }
-      }
-      
+      state.payments = pay     
     },
     ADD_CAT(state, cat) {
       state.categories.push(cat)
@@ -91,9 +97,7 @@ export default new Vuex.Store({
     },
 
     SET_CAT(state, list) {
-      state.categories = list.map((vl)=>{
-        return {...vl, sumpay: 0}
-      })
+      state.categories = list
     },
 
     SET_BUDGET() {
@@ -166,17 +170,8 @@ export default new Vuex.Store({
     },
 
     getPaymentsCurMonth({ commit }) {
-      idb.get('payments').then(payments=>{        
-        
-        payments.forEach(el => {          
-          const amount_date = new Date(el.amount_date)
-          const cur_date = new Date()
-                    
-          if (amount_date.getMonth() == cur_date.getMonth() && amount_date.getFullYear() == cur_date.getFullYear()) {
-            commit('ADD_CURMONTH_PAY', el)
-          }
-        })
-
+      idb.get('payments').then(payments=>{
+        commit('ADD_CURMONTH_PAY', payments)
       })
     },    
 

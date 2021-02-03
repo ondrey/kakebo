@@ -4,11 +4,11 @@
                 
 
                 <div class="plan" style="display: flex; justify-content: space-between; min-height:0">
-                    <div class="back" style="width: 100%">
+                    <div class="back back_jambo" style="width: 100%">
                         
                         <span style="padding: 3px;">
                             <span style="font-size: small">Доход сумарно</span> <br>
-                            <span style="font-size: xx-large;">{{ sum_planes }}</span> 
+                            <span style="font-size: xx-large;">{{ sum_planes.toLocaleString() }}</span> 
                             
                         </span>
 
@@ -25,11 +25,11 @@
                 <list :delete_show="true" :list="plans" @delete_record="delete_plan" v-show="sum_planes!=0">
                     <template v-slot="slotProps">
                         <span style="padding-left: 5px;">
-                            <div style="font-size:small; width: max-content;">{{slotProps.row.amount_comment}}</div> 
+                            <div style="width: max-content;">{{slotProps.row.amount_comment}}</div> 
                         </span>
                         <span 
                             style="margin-right: 8px; width: 100%; text-align: end;">                        
-                            <div class="crimson_lite">{{slotProps.row.amount}}</div>                                                                                 
+                            <div class="crimson_lite">{{slotProps.row.amount.toLocaleString()}}</div>                                                                                 
                         </span>   
                     </template>
 
