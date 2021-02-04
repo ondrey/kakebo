@@ -46,6 +46,24 @@ export default {
             store.delete(id);
         });    
     },
+
+    async clear(objname) {
+        
+
+        let db = await this.getDb();
+
+        return new Promise(resolve => {
+
+            let trans = db.transaction([objname],'readwrite');
+            trans.oncomplete = () => {
+                resolve();
+            };
+
+            let store = trans.objectStore(objname);
+            store.clear();
+        });    
+    },
+
     async get(objname) {
 
         let db = await this.getDb();

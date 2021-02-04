@@ -112,7 +112,8 @@ export default {
         
         
         this.$store.dispatch('addSaving', {label, fact, plan}).then(()=>{
-          this.alert = false          
+          this.alert = false  
+          this.$store.dispatch('clearPay')
         })
 
         

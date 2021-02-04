@@ -114,8 +114,8 @@ export default new Vuex.Store({
     ADD_CAT(state, cat) {
       state.categories.push(cat)
     },
-    ADD_PAY(state) {
-      console.log(state)
+    SET_PAY(state, payments) {
+      state.payments = payments
     },
     ADD_PLAN(state, plan) {
       state.plans.unshift(plan)
@@ -148,6 +148,16 @@ export default new Vuex.Store({
 
   },
   actions: {
+    clearPay({ commit }, ){
+      return new Promise((resolve, reject) => {
+        idb.clear('payments').then(()=>{
+          commit('SET_PAY', [])
+          resolve()
+        }).catch(()=>{
+          reject('Не удалось закрыть период.')
+        })
+      })
+    },
     addSaving({ commit }, params = []) {
 
       return new Promise((resolve, reject) => {
@@ -176,7 +186,7 @@ export default new Vuex.Store({
 
       return new Promise((resolve, reject) => {
         idb.save('payments', pay).then(()=>{
-          commit('ADD_PAY', pay)
+          commit('SET_PAY', pay)
           resolve(pay)
         }).catch(()=>{
           reject('Не удалось добавить платёж в базу')
