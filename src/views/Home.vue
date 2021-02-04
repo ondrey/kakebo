@@ -18,8 +18,8 @@
           <span>{{(sum_budget_category - sum_payments).toLocaleString()}}</span>      
           <span style="font-size: small; text-align: end;"> {{sum_payments.toLocaleString()}} Расход <br> {{sum_budget_category.toLocaleString()}} Бюджет  </span>
         </div>
-        <div style="text-align: end; margin: 0.5em;">
-          <button class="buttonplus">Закрыть период</button>
+        <div style="margin: 0.5em;">
+          <button class="buttonplus button_large" @click="alert=!alert">Закрыть период</button>
         </div>
         
       </div>
@@ -32,20 +32,20 @@
   <div class="plan">    
     <div v-show="!is_complate" style="padding: 0.5em; color: crimson; text-align: center; font-size: small;"> 
       
-      Для начала отслеживания накоплений, заполните данные по своим ежемесячным платежам и даходам. 
+      Для начала отслеживания накоплений, заполните данные по своим ежемесячным расходам и доходам. 
     </div>
 
     <div class="head_box">        
-      <a href="#/current-cost" class="linkpage" style="text-align:left">Ежемесячные траты</a>  {{sum_costs.toLocaleString()}}
+      <a href="#/current-cost" class="linkpage" style="text-align:left">Обязательные расходы</a>  {{sum_costs.toLocaleString()}}
     </div>
 
 
-    <div class="head_box" style="padding-bottom:5px">    
-      <a href="#/current-income" class="linkpage" style="text-align:left">Доходы</a>  {{sum_planes.toLocaleString()}}  
+    <div class="head_box" style="padding-bottom:5px">
+      <a href="#/current-income" class="linkpage" style="text-align:left">Плановые доходы</a>  {{sum_planes.toLocaleString()}}  
     </div>
 
-    <div class="head_box" style="padding-bottom:5px" v-show="sum_planes">    
-      <a href="#/budget-cat" class="linkpage" style="text-align:left">План</a> {{(budget - sum_budget_category).toLocaleString()}}
+    <div class="head_box" style="padding-bottom:5px" v-show="(budget - sum_budget_category)">    
+      <a href="#/budget-cat" class="linkpage" style="text-align:left">Бюджет по категориям</a> {{(budget - sum_budget_category).toLocaleString()}}
     </div>
 
   </div>
@@ -56,6 +56,19 @@
     <line-chart :chart-data="datacollection"></line-chart>
   </div>    
 
+
+  <alert :visible.sync="alert" title="Закрытие периода">
+    <div style="margin-top: 1em;">У вас осталось <span style="color:crimson; font-size: x-large;">{{(sum_planes - (Math.abs(sum_costs) + sum_payments)).toLocaleString()}}</span> средств. Вы хотите отправить их в накопление ?</div>
+    <p style="color: darkgoldenrod; font-size: small; text-align: center;">
+      
+          Внимание! После закрытия периода, расходы по категорям будут анулированы. Внимательно проанализируйти расходы по категорям и пересмотрите бюджет если потребуеться. 
+        
+    </p>
+    <button class="buttonplus button_large" @click="alert=!alert">Отмена</button>
+    <button class="buttonplus button_large" style="float: right;" @click="alert=!alert">Да, закрыть период</button>
+  </alert>
+
+
 </div>
   
 </template>
@@ -64,11 +77,12 @@
 import { mapGetters } from 'vuex';
 
 import LineChart from '../components/chart'
+import Alert from '../components/alert'
 
 
 export default {
   components: {
-      LineChart
+      LineChart, Alert
   },  
   computed: {
     ...mapGetters(['sum_costs', 'sum_planes', 'sum_payments', 'sum_budget_category', 'categories_dif', 'budget', 'is_complate'])
@@ -84,8 +98,10 @@ export default {
       datacollection: {
         labels: ['12.05', '16.06', '09.10', '12.05', '16.06', '09.10'],
         datasets: [
-            {data: [-789, -300, -456, 0, 123, 250]
+            {data: [-789, -300, -456, 0, 123, 250], backgroundColor: '#0063826b'
             ,label: 'Динамика накоплений'}, 
+            {data: [200, 350, 100, 200, 150, 200]
+            ,label: 'План'},
           ]
       },
     }

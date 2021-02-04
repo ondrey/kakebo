@@ -28,7 +28,6 @@ export default {
     border-radius: 0px 0px 6px 6px;
     padding-top: 32px;
     box-shadow: 0px 9px 4px #828282;
-    color: crimson;
 }
 
 .bounce-enter-active {
