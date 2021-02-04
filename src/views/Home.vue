@@ -52,8 +52,8 @@
 
   <div class="title">Плановые платежи</div>
   
-  <div>
-    <line-chart :chart-data="datacollection"></line-chart>
+  <div v-show="savings">
+    <line-chart :chart-data="savings"></line-chart>
   </div>    
 
 
@@ -65,7 +65,7 @@
         
     </p>
     <button class="buttonplus button_large" @click="alert=!alert">Отмена</button>
-    <button class="buttonplus button_large" style="float: right;" @click="alert=!alert">Да, закрыть период</button>
+    <button class="buttonplus button_large" style="float: right;" @click="close_period">Да, закрыть период</button>
   </alert>
 
 
@@ -85,31 +85,37 @@ export default {
       LineChart, Alert
   },  
   computed: {
-    ...mapGetters(['sum_costs', 'sum_planes', 'sum_payments', 'sum_budget_category', 'categories_dif', 'budget', 'is_complate'])
+    ...mapGetters(['sum_costs', 'sum_planes', 'sum_payments', 'sum_budget_category', 'categories_dif', 'budget', 'is_complate', 'savings'])
   },
   created(){
     this.$store.dispatch('getPlans')
     this.$store.dispatch('getPaymentsCurMonth')
-    this.$store.dispatch('getCategory')    
+    this.$store.dispatch('getCategory') 
+    this.$store.dispatch('getSavings') 
+       
   },
   data(){
     return {
-      alert: false, 
-      datacollection: {
-        labels: ['12.05', '16.06', '09.10', '12.05', '16.06', '09.10'],
-        datasets: [
-            {data: [-789, -300, -456, 0, 123, 250], backgroundColor: '#0063826b'
-            ,label: 'Динамика накоплений'}, 
-            {data: [200, 350, 100, 200, 150, 200]
-            ,label: 'План'},
-          ]
-      },
+      alert: false
     }
   },
   
   methods: {     
       dgclass(dg){
         return dg < 0 ? 'dgminus' : 'dgnormal'
+      },
+      close_period(){
+        const curdate = new Date()
+        const label = curdate.toLocaleDateString()
+        const fact = this.sum_planes - (Math.abs(this.sum_costs) + this.sum_payments)
+        const plan = this.budget - this.sum_budget_category
+        
+        
+        this.$store.dispatch('addSaving', {label, fact, plan}).then(()=>{
+          this.alert = false          
+        })
+
+        
       }      
   }
 }

@@ -9,9 +9,32 @@ export default new Vuex.Store({
   state: {
     categories: [],
     plans: [],
-    payments: []
+    payments: [],
+    savings: []
   },
   getters: {
+    savings: state=>{
+      
+      let result = {label:[], fact: [], plan: []}
+      for (let ix = 0; ix < state.savings.length; ix++) {
+        const el = state.savings[ix]
+        
+        // result.label.push(`${el.label} ${el.id_saving ? el.id_saving : 'Новый'}`)
+        result.label.push(`${el.label}`)
+        result.fact.push(el.fact)
+        result.plan.push(el.plan)
+      }      
+
+      return {
+        labels: result.label,
+        datasets: [
+            {data: result.fact, backgroundColor: '#0063826b'
+            ,label: 'Динамика накоплений'}, 
+            {data: result.plan
+            ,label: 'План'},
+          ]
+      }
+    },
     is_complate: state =>{
       return state.categories.length > 0 && state.plans.length > 0
     },
@@ -79,6 +102,12 @@ export default new Vuex.Store({
 
   },
   mutations: {
+    SET_SAVING(state, savings){
+      state.savings = savings
+    },
+    ADD_SAVING(state, params) {
+      state.savings.push(params)
+    },
     ADD_CURMONTH_PAY(state, pay) {
       state.payments = pay     
     },
@@ -119,6 +148,18 @@ export default new Vuex.Store({
 
   },
   actions: {
+    addSaving({ commit }, params = []) {
+
+      return new Promise((resolve, reject) => {
+        idb.save('savings', params).then(()=>{
+          commit('ADD_SAVING', params)
+          resolve(params)
+        }).catch(()=>{
+          reject('Не удалось закрыть период.')
+        })
+      })
+    },
+
     addCategories({ commit }, categori = {}) {
 
       return new Promise((resolve, reject) => {
@@ -168,6 +209,12 @@ export default new Vuex.Store({
         commit('SET_PLANS', plans)
       })
     },
+
+    getSavings({ commit }) {
+      idb.get('savings').then(saveing=>{
+        commit('SET_SAVING', saveing)
+      })
+    },    
 
     getPaymentsCurMonth({ commit }) {
       idb.get('payments').then(payments=>{
