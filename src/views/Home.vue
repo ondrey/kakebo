@@ -52,9 +52,9 @@
 
   <div class="title">Плановые платежи</div>
   
-  <div v-show="savings">
+  <div>
     <line-chart :chart-data="savings"></line-chart>
-  </div>    
+  </div>   
 
 
   <alert :visible.sync="alert" title="Закрытие периода">
