@@ -1,7 +1,7 @@
 <template>
   <div style="padding:12px 8px 8px 12px;">
     <div style="display: flex;justify-content: space-between;padding-bottom: 15px;font-family: system-ui; font-size: small; color: darkgray;">
-      <span> <span class="el-icon-s-home"></span> <a href="/" class="linkpage">KJM</a> - {{$router.history.current.meta.title}}</span> 
+      <span> <span class="el-icon-s-home"></span> <a href="/" class="linkpage">Seed</a> - {{$router.history.current.meta.title}}</span> 
       <span> <a href="#/about" class="linkpage">О программе</a> </span>
     </div> 
 
