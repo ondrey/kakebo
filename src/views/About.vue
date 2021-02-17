@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h2>Seed <br /> <span style="font-size: small;">Персональный треккер накоплений</span> </h2> 
+    <h2>S<span style="color: crimson;">ee</span>d <br /> <span style="font-size: small;">Персональный треккер накоплений</span> </h2> 
     <p>
       <span class="el-icon-s-finance" style="font-size: xx-large; color: crimson;"></span>
       Программа для контроля расходов и слежения за прогрессом накоплений. 

@@ -1,16 +1,11 @@
 <template>
   <div>
                 <div class="plan" style="min-height:0">
-                    <div>
-                    <button class="buttonplus button_large" style="color: crimson;" @click="alert_kakebo=!alert_kakebo"> 
-                        <span class="el-icon-s-operation buttoicon"></span> Категории kakebo
-                    </button>
 
-                    <button class="buttonplus button_large" style="float:right"
+                    <button class="buttonplus button_large" 
                         @click="alert=!alert"> 
                         <span class="el-icon-circle-plus-outline buttoicon"></span> Добавить категорию
                     </button>
-                    </div>
 
                     <div class="back">
 
@@ -36,7 +31,7 @@
                         <div style="display: flex; justify-content: space-between;">
                             <button 
                                 class="buttonplus delbtn" 
-                                style="margin-left: 5px;"
+                                style="margin-left: 5px;  margin-right: 5px;"
                                 @click="delrec(cat.id_cat)"> 
 
                                 <span class="el-icon-delete buttoicon"></span>
@@ -56,20 +51,16 @@
 
                     </div>
                 </div>
-                
-
-                <alert :visible.sync="alert_kakebo" title="Категории kakebo">
-                    <p>Создать список категорий по умалчанию, на основе японской системы какебо. </p>
-                    <button class="buttonplus button_large" @click="alert_kakebo=!alert_kakebo"> <span class="el-icon-caret-left buttoicon"></span> Отмена</button>
-                    <button class="buttonplus button_large" @click="create_kakebo" style="float: right;"> <span class="el-icon-circle-check buttoicon"></span> Создать</button>
-                </alert>
 
                 <alert :visible.sync="alert" title="Новая категория">
                     <div class="plan" style="margin-top: 1em;">
                         <button class="buttonplus button_large" @click="alert=!alert"> <span class="el-icon-caret-left buttoicon"></span> Отмена</button>
-                        
+                        <button class="buttonplus button_large" style="color: crimson;" @click="create_kakebo" 
+                        v-show="categories.length==0"> 
+                            <span class="el-icon-s-operation buttoicon"></span> Авто
+                        </button>
                         <button class="buttonplus button_large" style="float: right;" :disabled="!Boolean(cat_name)" @click="add_category">
-                            <span class="el-icon-circle-plus-outline buttoicon"></span> Сохранить
+                            <span class="el-icon-circle-plus-outline buttoicon"></span> Ок
                         </button>
 
                         <div class="back">
@@ -102,7 +93,7 @@ export default {
 
     data(){
         return {
-            alert: false, alert_kakebo:false,
+            alert: false, 
             cat_name: ''
         }
     },
@@ -123,7 +114,7 @@ export default {
             this.$store.dispatch('addCategories', {name_cat: 'Культура и образование', budget: 0.0}).then(() => {
             this.$store.dispatch('addCategories', {name_cat: 'Развлечения', budget: 0.0}).then(() => {
             this.$store.dispatch('addCategories', {name_cat: 'Непредвиденные', budget: 0.0}).then(() => {
-                this.alert_kakebo = false
+                this.alert = false
                 this.$store.dispatch('getCategory')
             })})})})
             

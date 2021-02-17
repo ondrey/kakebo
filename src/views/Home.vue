@@ -30,22 +30,18 @@
 
   
   <div class="plan">    
-    <div v-show="!is_complate" style="padding: 0.5em; color: crimson; text-align: center; font-size: small;"> 
-      
-      Для начала отслеживания накоплений, заполните данные по своим ежемесячным расходам и доходам. 
-    </div>
-
-    <div class="head_box">        
-      <a href="#/current-cost" class="linkpage" style="text-align:left">Обязательные расходы</a>  {{sum_costs.toLocaleString()}}
+    
+    <div class="head_box">
+      <a href="#/current-cost" class="linkpage" style="text-align:left">Мои расходы</a>  {{sum_costs.toLocaleString()}}
     </div>
 
 
     <div class="head_box" style="padding-bottom:5px">
-      <a href="#/current-income" class="linkpage" style="text-align:left">Плановые доходы</a>  {{sum_planes.toLocaleString()}}  
+      <a href="#/current-income" class="linkpage" style="text-align:left">Мои доходы</a>  {{sum_planes.toLocaleString()}}  
     </div>
 
     <div class="head_box" style="padding-bottom:5px" v-show="(budget - sum_budget_category)">    
-      <a href="#/budget-cat" class="linkpage" style="text-align:left">Бюджет по категориям</a> {{(budget - sum_budget_category).toLocaleString()}}
+      <a href="#/budget-cat" class="linkpage" style="text-align:left">План накоплений</a> {{(budget - sum_budget_category).toLocaleString()}}
     </div>
 
   </div>
