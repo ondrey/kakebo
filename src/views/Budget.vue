@@ -1,12 +1,16 @@
 <template>
   <div>
                 <div class="plan" style="min-height:0">
+                    <div style="display: flex; justify-content: space-between;">
+                        <button class="buttonplus button_large" tabindex="6" @click="$router.push('/')"> <span class="el-icon-caret-left buttoicon"></span> Отмена</button>
 
-                    <button class="buttonplus button_large" 
-                        @click="alert=!alert"> 
-                        <span class="el-icon-circle-plus-outline buttoicon"></span> Добавить категорию
-                    </button>
+                        <button class="buttonplus button_large" 
+                            @click="alert=!alert"> 
+                            <span class="el-icon-circle-plus-outline buttoicon"></span> Добавить
+                        </button>
 
+                    </div>
+                    
                     <div class="back">
 
                         <span style="padding: 3px;">
@@ -60,7 +64,7 @@
                             <span class="el-icon-s-operation buttoicon"></span> Авто
                         </button>
                         <button class="buttonplus button_large" style="float: right;" :disabled="!Boolean(cat_name)" @click="add_category">
-                            <span class="el-icon-circle-plus-outline buttoicon"></span> Ок
+                            <span class="el-icon-circle-plus-outline buttoicon"></span> Добавить
                         </button>
 
                         <div class="back">

@@ -2,23 +2,23 @@
 
     <div>
                 
-
-                <div class="plan" style="display: flex; justify-content: space-between; min-height:0">
-                    <div class="back back_jambo" style="width: 100%">
-                        
-                        <span style="padding: 3px;">
-                            <span style="font-size: small">Сумма по ежемесячным платежам</span> <br>
-                            <span style="font-size: xx-large;">{{ sum_costs.toLocaleString() }}</span> 
-                            
-                        </span>
-
-                    </div>
-                    <button class="buttonplus button_large" tabindex="5"
-                        @click="alert=!alert"> 
-                    <span class="el-icon-circle-plus-outline buttoicon"></span> Добавить
-                    </button>
-                </div>                
+          
                 
+                <addform 
+                    :form.sync="form"
+                    title="Плановый платёж" 
+                    :hidden_dateinput="true"
+                    @enter="add_plan"            
+                    >            
+                    <button class="buttonplus button_large" tabindex="6" @click="$router.push('/')"> <span class="el-icon-caret-left buttoicon"></span> Отмена</button>
+                            
+                    <div>                    
+                        <button class="buttonplus button_large" tabindex="5"  :disabled="!Boolean(form.amount)" @click="add_plan">
+                            <span class="el-icon-circle-plus-outline buttoicon"></span> Добавить
+                        </button>
+                    </div>
+                </addform>
+                <div class="title" v-show="sum_costs!=0">Ежемесячные расходы <span style="color: crimson;">{{ sum_costs.toLocaleString() }}</span></div>
 
 
                 <list :delete_show="true" :list="plans_cost" @delete_record="delete_plan" v-show="sum_costs!=0">
@@ -35,26 +35,11 @@
 
                 </list>
 
-                <div class="title" v-show="sum_costs!=0">Ежемесячные расходы</div>
+                
 
 
 
-                <alert :visible.sync="alert" title="">
-                <addform 
-                    :form.sync="form"
-                    title="Плановый платёж" 
-                    :hidden_dateinput="true"
-                    @enter="add_plan"            
-                    >            
-                    <button class="buttonplus button_large" tabindex="6" @click="alert=!alert"> <span class="el-icon-caret-left buttoicon"></span> Отмена</button>
-                            
-                    <div>                    
-                        <button class="buttonplus button_large" tabindex="5"  :disabled="!Boolean(form.amount)" @click="add_plan">
-                            <span class="el-icon-circle-plus-outline buttoicon"></span> Сохранить
-                        </button>
-                    </div>
-                </addform>
-                </alert>
+
 
                 
         
@@ -67,12 +52,12 @@
 import { mapGetters } from 'vuex';
 
 import Addform from "../components/addform"
-import Alert from '../components/alert'
+
 import List from "../components/historylist"
 
 export default {    
     components:{
-        Addform, Alert, List
+        Addform, List
     },
 
     computed: {
@@ -80,8 +65,7 @@ export default {
     },
 
     data(){
-        return {
-            alert: false,            
+        return {                  
             form: {
                 amount_date: new Date().toISOString().split('T')[0],
                 amount: null,
